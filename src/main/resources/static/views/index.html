@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Reach PLC</title>
+</head>
+<body ng-app="awsprimerplc">
+<hr/>
+<div class="container" ng-controller="EventController">
+    <div class="row">
+        <label>Site Name</label> 
+        <select ng-model="dailyEvents.siteName">
+          <option value="">Select SiteName</option>
+          <option ng-repeat="site in allSites" value="{{ site.siteName }}">{{ site.siteName }}</option>
+		</select>
+        <label>Event Type</label> 
+        <select ng-model="dailyEvents.eventType">
+          <option value="">Select EventType</option>
+		  <option value="newsletter-subscription">Newsletter Subscription</option>
+		  <option value="newsletter-unsubscription">Newsletter Unsubscription</option>
+		  <option value="account-creation">Account Creation</option>
+		  <option value="latest-interaction">Latest Interaction</option>
+		</select>        
+        <button ng-click="saveEvent()" class="btn btn-sm btn-info">Generate Event</button>
+    </div>
+    <br>
+    <br>
+    <table border="1" ng-if="allEvents.length">
+	   <thead>
+	  	<tr>
+		    <th>Site Name</th>
+		    <th>Event Type</th>
+		    <th>Email</th>
+		    <th>Last Event</th>
+	    </tr>
+	    </thead>
+	  <tr ng-repeat="event in allEvents">  	
+	    <td>{{ event.siteName }}</td>
+	    <td>{{ event.eventType }}</td>
+	    <td>{{ event.email }}</td>
+	    <td>{{ event.lastEvent }}</td>
+	  </tr>
+</table>
+  
+</div>
+</body>
+<script src="js/lib/angular.min.js"></script>
+<script src="js/lib/ui-bootstrap-tpls-2.5.0.min.js"></script>
+<script src="js/app/app.js"></script>
+<script src="js/app/EventController.js"></script>
+<script src="js/app/EventService.js"></script>
+<link rel="stylesheet" href="css/lib/bootstrap.min.css"/>
+<link rel="stylesheet" href="css/app/app.css"/>
+</html>
